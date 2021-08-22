@@ -42,11 +42,11 @@ int main() {
     // string str1 = gen_random();
     // cout << str1 << endl;
 
-    int var1;
-    char var2[10];
+    string filename;
 
-    cout << "变量var1内存地址：" << &var1 << endl;
-    cout << "变量var2内存地址：" << &var2 << endl;
+    cout << "请输入文件路径：";
+    cin >> filename;
+    cout << "输入的文件路径名为：" << filename << endl;
 
     return 0;
 }
