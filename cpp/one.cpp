@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string.h>
 
 using namespace std;
@@ -23,15 +24,8 @@ string gen_random() {
 
 int main() {
 
-    // ofstream outfile;
+    ofstream outfile;
     // outfile.open("data.txt");
-    
-    // for (int i = 0; i < 1000; i++) {
-    //     outfile << "test file write" << endl;
-    // }
-
-    // 关闭文件
-    // outfile.close();
 
     // int array[10] = {100, 10, 1, 99, 77, 55, 33, 11, 2, 4};
 
@@ -47,6 +41,14 @@ int main() {
     cout << "请输入文件路径：";
     cin >> filename;
     cout << "输入的文件路径名为：" << filename << endl;
+
+    outfile.open(filename);
+    for (int i = 0; i < 1000; i++) {
+        outfile << "test file write" << i << endl;
+    }
+
+    // 关闭文件
+    outfile.close();
 
     return 0;
 }
