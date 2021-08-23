@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <vector>
 
 using namespace std;
 
@@ -49,6 +50,12 @@ int main() {
 
     // 关闭文件
     outfile.close();
+
+    int array[5] = {1, 2, 3, 4, 5};
+    vector<int> list(array, array + 5);
+    for (int i = 0; i < list.size(); i++) {
+        cout << list[i] << endl;
+    }
 
     return 0;
 }
