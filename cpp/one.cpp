@@ -1,9 +1,12 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <vector>
+#include "nlohmann/json.hpp"
 
 using namespace std;
+
+using json = nlohmann::json;
 
 string gen_random() {
     char s[64];
@@ -25,7 +28,7 @@ string gen_random() {
 
 int main() {
 
-    ofstream outfile;
+    // ofstream outfile;
     // outfile.open("data.txt");
 
     // int array[10] = {100, 10, 1, 99, 77, 55, 33, 11, 2, 4};
@@ -37,25 +40,36 @@ int main() {
     // string str1 = gen_random();
     // cout << str1 << endl;
 
-    string filename;
+    // string filename;
 
-    cout << "请输入文件路径：";
-    cin >> filename;
-    cout << "输入的文件路径名为：" << filename << endl;
+    // cout << "请输入文件路径：";
+    // cin >> filename;
+    // cout << "输入的文件路径名为：" << filename << endl;
 
-    outfile.open(filename);
-    for (int i = 0; i < 1000; i++) {
-        outfile << "test file write" << i << endl;
-    }
+    // outfile.open(filename);
+    // for (int i = 0; i < 1000; i++) {
+    //     outfile << "test file write" << i << endl;
+    // }
 
     // 关闭文件
-    outfile.close();
+    // outfile.close();
 
-    int array[5] = {1, 2, 3, 4, 5};
-    vector<int> list(array, array + 5);
-    for (int i = 0; i < list.size(); i++) {
-        cout << list[i] << endl;
-    }
+    // int array[5] = {1, 2, 3, 4, 5};
+    // vector<int> list(array, array + 5);
+    // for (int i = 0; i < list.size(); i++) {
+    //     cout << list[i] << endl;
+    // }
+
+    json j;
+
+    j["pi"] = 3.1415926;
+    j["happy"] = true;
+    j["name"] = "Niels";
+    j["nothing"] = nullptr;
+
+    string s = j.dump();
+
+    cout << s << endl;
 
     return 0;
 }
