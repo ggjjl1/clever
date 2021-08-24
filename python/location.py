@@ -46,7 +46,7 @@ def main():
     data = []
     with open('/Users/gaojunliang/Desktop/post_location.txt', 'r') as f:
         for line in f:
-            pid, location = line.replace('\n','').split('\t')
+            pid, location = line.replace('\n', '').split('\t')
             # print("pid:" + pid + ", location:" + location)
             address = lnglat_to_address(location)
             data.append((pid, location, address))
