@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*_
+# -*- coding: utf-8 -*-
 
 "一个尝试用Python编写的饭否客户端"
 
@@ -42,7 +42,7 @@ class Fanfou(object):
         rs = self.session.post(login_url, data=datas, headers=headers)
 
     # 获取首页用户消息
-    def getNews(self, max_id=''):
+    def get_news(self, max_id=''):
         if self.session is None:
             # print('未登录状态，开始登录')
             self.login()
@@ -79,11 +79,11 @@ class Fanfou(object):
                 print("head匹配失败。")
 
     # 获取更多用户消息
-    def getNext(self, max_id=''):
+    def get_next(self, max_id=''):
         max_id = self.max_id if max_id == '' else max_id
         self.getNews(max_id)
 
-    def getHtml(self):
+    def get_html(self):
         url = "http://fanfou.com/"
         html = urllib.urlopen(url)
         text = html.read()
@@ -105,9 +105,9 @@ def main():
         if entry == 'quit' or entry == 'exit':
             break
         elif entry == 'home':
-            fanfou.getNews()
+            fanfou.get_news()
         elif entry == 'next':
-            fanfou.getNews(fanfou.max_id)
+            fanfou.get_news(fanfou.max_id)
 
 if __name__ == '__main__':
     main()
