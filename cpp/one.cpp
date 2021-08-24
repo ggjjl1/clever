@@ -1,10 +1,16 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <vector>
+<<<<<<< HEAD
 #include <sstream>
+=======
+#include "nlohmann/json.hpp"
+>>>>>>> 8d9df31240d8533006d1d50eb16be61a6a2a490b
 
 using namespace std;
+
+using json = nlohmann::json;
 
 string gen_random() {
     char s[64];
@@ -26,7 +32,7 @@ string gen_random() {
 
 int main() {
 
-    ofstream outfile;
+    // ofstream outfile;
     // outfile.open("data.txt");
 
     // int array[10] = {100, 10, 1, 99, 77, 55, 33, 11, 2, 4};
@@ -58,6 +64,7 @@ int main() {
     //     cout << list[i] << endl;
     // }
 
+<<<<<<< HEAD
     double pi = 3.1415926;
     float dollar = 1.00;
     int dozen = 12;
@@ -85,6 +92,18 @@ int main() {
 
     string text = ss.str();
     cout << text << endl;
+=======
+    json j;
+
+    j["pi"] = 3.1415926;
+    j["happy"] = true;
+    j["name"] = "Niels";
+    j["nothing"] = nullptr;
+
+    string s = j.dump();
+
+    cout << s << endl;
+>>>>>>> 8d9df31240d8533006d1d50eb16be61a6a2a490b
 
     return 0;
 }
