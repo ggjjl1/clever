@@ -8,9 +8,11 @@ import requests
 
 # 高德地图api
 # 文档：https://lbs.amap.com/api/webservice/guide/api/georegeo
-# 示例：https://restapi.amap.com/v3/geocode/regeo?location=116.310003,39.991957&key=5ec8c7635029008017d09c2db33351ba&radius=100&extensions=base
+# 示例：https://restapi.amap.com/v3/geocode/regeo?location=116.310003,39.991957&key=<用户的key>&radius=100&extensions=base
 base_url = "https://restapi.amap.com/v3/geocode/regeo"
-seckey = "5ec8c7635029008017d09c2db33351ba"
+
+# 需要申请自己的key
+seckey = "******"
 
 def lnglat_to_address(location):
     "经纬度转换为地理位置"
