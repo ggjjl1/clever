@@ -2,11 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-<<<<<<< HEAD
-#include <sstream>
-=======
 #include "nlohmann/json.hpp"
->>>>>>> 8d9df31240d8533006d1d50eb16be61a6a2a490b
 
 using namespace std;
 
@@ -64,35 +60,6 @@ int main() {
     //     cout << list[i] << endl;
     // }
 
-<<<<<<< HEAD
-    double pi = 3.1415926;
-    float dollar = 1.00;
-    int dozen = 12;
-    int number = 35;
-
-    stringstream ss;
-
-    ss << "dozen: " << dozen << endl;
-
-    // 显示小数
-    ss.setf(ios::fixed);
-
-    // 显示2位小数
-    ss.precision(2);
-    ss << "dollar: " << dollar << endl;
-
-    // 显示10位小数
-    ss.precision(10);
-    ss << "pi: " << pi << endl;
-
-    // 以十六进制显示整数
-    ss.unsetf(ios_base::dec);
-    ss.setf(ios::hex);
-    ss << "number: " << number << endl;
-
-    string text = ss.str();
-    cout << text << endl;
-=======
     json j;
 
     j["pi"] = 3.1415926;
@@ -103,7 +70,6 @@ int main() {
     string s = j.dump();
 
     cout << s << endl;
->>>>>>> 8d9df31240d8533006d1d50eb16be61a6a2a490b
 
     return 0;
 }
