@@ -24,7 +24,7 @@ class Fanfou(object):
 
     def login(self):
         login_url = "http://fanfou.com/login"
-        datas = {'loginname': self.username, 'loginpass': self.password}
+        params = {'loginname': self.username, 'loginpass': self.password}
         headers = {'User-Agent': self.useragent}
         # 获取登录参数
         r = requests.get('http://fanfou.com/login?fr=%2F', headers=headers)
@@ -33,10 +33,10 @@ class Fanfou(object):
             r.text)
         token = s.group(1)
         urlfrom = s.group(2)
-        datas.update({'action': 'login', 'token': token, 'urlfrom': urlfrom})
+        params.update({'action': 'login', 'token': token, 'urlfrom': urlfrom})
         # 通过session方式登录
         self.session = requests.Session()
-        rs = self.session.post(login_url, data=datas, headers=headers)
+        rs = self.session.post(login_url, data=params, headers=headers)
 
     # 获取首页用户消息
     def get_news(self, max_id=''):
