@@ -3,10 +3,12 @@
 
 import requests
 
+url = 'https://freiexchange.com/'
+
 
 def main():
-    r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
-    r.status_code
+    r = requests.get(url)
+    print(r.status_code)
 
 
 if __name__ == '__main__':
