@@ -5,6 +5,7 @@
 # description: 尝试抓取一下豆瓣电影信息
 import time
 import requests
+import mysql.connector
 
 # 豆瓣首页url
 douban_home_url = 'https://www.douban.com/'
@@ -35,27 +36,66 @@ headers = {
 
 
 def douban(url):
+    # 连接mysql
+    conn = mysql.connector.connect(host='127.0.0.1',
+                                   user='root',
+                                   password='12345678',
+                                   database='douban')
+    cursor = conn.cursor()
+
     r = requests.get(url, headers=headers)
     obj = r.json()
-    movies = obj['data']
-    print("电影数量：%d" % len(movies))
-    for movie in movies:
-        directors = movie['directors']
-        rate = movie['rate']
-        cover_x = movie['cover_x']
-        star = movie['star']
-        title = movie['title']
-        url = movie['url']
-        casts = movie['casts']
-        cover = movie['cover']
-        id = movie['id']
-        cover_y = movie['cover_y']
-        print(movie)
+    try:
+        movies = obj['data']
+        print("电影数量：%d" % len(movies))
+        for movie in movies:
+            directors = movie['directors']
+            rate = movie['rate']
+            cover_x = movie['cover_x']
+            star = movie['star']
+            title = movie['title']
+            url = movie['url']
+            casts = movie['casts']
+            cover = movie['cover']
+            id = movie['id']
+            cover_y = movie['cover_y']
+            sql = 'insert into movie (directors,rate,cover_x,star,title,url,casts,cover,id,cover_y)\
+                values("{}","{}",{},"{}","{}","{}","{}","{}","{}",{})'.format(
+                directors, rate, cover_x, star, title, url, casts, cover, id,
+                cover_y)
+            # print(sql)
+            cursor.execute(sql)
+            conn.commit()
+
+    except KeyError:
+        # 频繁抓取会被ip会被禁
+        print(obj)
+        time.sleep(30)
+
+    cursor.close()
+    conn.close()
+
+
+def mysql_connect(host, user, passwd, database):
+    conn = mysql.connector.connect(host='127.0.0.1',
+                                   user='root',
+                                   password='12345678',
+                                   database='douban')
+    cursor = conn.cursor()
+    cursor.execute('select * form movie limit 10')
+    rows = cursor.fetchall()
+
+    for row in rows:
+        print(row)
+
+    cursor.close()
+    conn.close()
 
 
 def main():
     ajax_url = 'https://movie.douban.com/j/new_search_subjects'
     start, genres = 0, '爱情'
+
     while True:
         url = ajax_url + '?sort=T&range=0,10&tags=&start=' + str(
             start) + '&genres=' + genres

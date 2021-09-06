@@ -28,6 +28,10 @@ string gen_random() {
     return string(s);
 }
 
+enum class Color {
+    GREEN, BLUE, RED, YELLOW, BLACK
+};
+
 int main() {
 
     // ofstream outfile;
@@ -100,6 +104,12 @@ int main() {
     cout << *&i << endl;
 
     system("pause");
+
+    cout << "+====================================+" << endl;
+    cout << "|              hard seed             |" << endl;
+    cout << "+------------------------------------+" << endl;
+    cout << "|                                    |" << endl; 
+    cout << "+====================================+" << endl;
 
     return 0;
 }
