@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <set>
+
 #include "nlohmann/json.hpp"
 
 using namespace std;
@@ -64,16 +66,44 @@ int main() {
     //     cout << list[i] << endl;
     // }
 
-    json j;
+    // json j;
 
-    j["pi"] = 3.1415926;
-    j["happy"] = true;
-    j["name"] = "Niels";
-    j["nothing"] = nullptr;
+    // j["pi"] = 3.1415926;
+    // j["happy"] = true;
+    // j["name"] = "Niels";
+    // j["nothing"] = nullptr;
 
-    string s = j.dump();
+    // string s = j.dump();
 
-    cout << s << endl;
+    // cout << s << endl;
+
+    // vector<string> list = {"java", "c++", "go", "python", "rust"};
+    // for (int i = 0; i < list.size(); i++) {
+    //     cout << list[i] << endl;
+    // }
+
+    // set<int> set1;
+    // set1.insert(1);
+    // set1.insert(2);
+    // set1.insert(3);
+    // set1.insert(1);
+
+    // set<int>::iterator it;
+    // for (it = set1.begin(); it != set1.end(); it++) {
+    //     cout << *it << endl;
+    // }
+
+    // const int a = 7;
+    // int *p = (int*)&a;
+    // *p = 8;
+    // a = 8;
+    // cout << a << endl;
+
+    int i = 10;
+    cout << &i << endl;
+    cout << *&i << endl;
+
+    system("pause");
 
     cout << "+====================================+" << endl;
     cout << "|              hard seed             |" << endl;

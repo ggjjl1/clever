@@ -1,3 +1,4 @@
+// 编译命令：g++ main.cpp -o main -I/Library/Frameworks/SDL2.framework/Headers -F/Library/Frameworks -framework SDL2
 #include <iostream>
 extern "C" {
     #include <SDL2/SDL.h>
