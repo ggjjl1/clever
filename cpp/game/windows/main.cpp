@@ -1,3 +1,4 @@
+// 依赖 SDL2.dll 动态库
 // windows下一个SDL2小程序，编译命令：g++ -std=c++14 main.cpp -o main -IC:\msys64\mingw64\include -LC:\msys64\mingw64\lib -lSDL2main -lSDL2
 #include <iostream>
 extern "C" {
