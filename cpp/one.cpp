@@ -1,3 +1,6 @@
+/**
+ * 在mac上编译c++11程序：g++ -std=c++11 one.cpp -o one
+ */
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -98,18 +101,9 @@ int main() {
     // *p = 8;
     // a = 8;
     // cout << a << endl;
+    uint8_t num = 67;
 
-    int i = 10;
-    cout << &i << endl;
-    cout << *&i << endl;
-
-    system("pause");
-
-    cout << "+====================================+" << endl;
-    cout << "|              hard seed             |" << endl;
-    cout << "+------------------------------------+" << endl;
-    cout << "|                                    |" << endl; 
-    cout << "+====================================+" << endl;
+    cout << num << endl;
 
     return 0;
 }

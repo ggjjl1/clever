@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-import redis
 from datetime import datetime
-
-
-class Clever(object):
-    """clever核心代码"""
-
-    def __init__(self, name):
-        self.name = name
 
 
 def leap_year(year):
@@ -22,8 +14,10 @@ def leap_year(year):
 
 
 def main():
-    now = datetime.now()
-    print("打印当前时间：%s" % now.strftime('%Y-%m-%d %H:%M:%S'))
+    if leap_year(2022):
+        print("闰年")
+    else:
+        print("平年")
 
 
 if __name__ == '__main__':

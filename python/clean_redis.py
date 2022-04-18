@@ -6,9 +6,9 @@ import redis
 r = redis.Redis(host='localhost', port=6379, db=0)
 
 def clean_redis():
-    for key in r.scan_iter(match='personasV4:uid:*', count=1):
+    for key in r.scan_iter(match='uid:*', count=10000):
         keyname = key.decode('utf-8')
-        r.hdel(keyname, 'recent_create_chat_uids')
+        r.hdel(keyname, 'username')
         print('删除key：' + keyname)
 
 if __name__ == '__main__':
