@@ -1,5 +1,4 @@
 import xmlrpc.client
 
-with xmlrpc.client.ServerProxy("http://localhost:9000/") as proxy:
-    print("3 is even: %s" % str(proxy.is_even(3)))
-    print("100 is even: %s" % str(proxy.is_even(100)))
+with xmlrpc.client.ServerProxy("http://gao:gao123@localhost:8252/") as proxy:
+    print(str(proxy.getinfo()))
