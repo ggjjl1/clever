@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
+import requests
 
-def echo():
-    print('中文')
-
-
-class Clever:
-    def __init__(self):
-        pass
+def get_block():
+    payload = {
+        'key1': 111,
+    }
+    r = requests.get('http://gao:gao123@localhost:8252', params=payload)
 
 
 if __name__ == '__main__':
@@ -19,3 +18,5 @@ if __name__ == '__main__':
     print('| 程序说明：测试测试  |')
     print('+---------------------+')
     print('\n')
+    
+    get_block()
