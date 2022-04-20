@@ -5,7 +5,7 @@
 using namespace std;
 
 int add(int a, int b) {
-    return;
+    return a + b;
 }
 
 int main()
@@ -13,7 +13,8 @@ int main()
     vector<string> msg {"Java", "C++", "Python", "Go", "JavaScript", "PHP"};
 
     for(const string& word : msg) {
-        cout << word << " ";
+        cout << word << endl;
     }
-    cout << "\n";
+    
+    return 0;
 }
