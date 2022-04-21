@@ -9,9 +9,9 @@ import requests
 # 高德地图api
 # 文档：https://lbs.amap.com/api/webservice/guide/api/georegeo
 # 示例：https://restapi.amap.com/v3/geocode/regeo?location=116.310003,39.991957&key=<用户的key>&radius=100&extensions=base
-base_url = "https://restapi.amap.com/v3/geocode/regeo"
+regeo_url = "https://restapi.amap.com/v3/geocode/regeo"
 
-base_url1 = "https://restapi.amap.com/v3/geocode/geo"
+geo_url = "https://restapi.amap.com/v3/geocode/geo"
 
 # 需要申请自己的key
 seckey = "******"
@@ -19,9 +19,15 @@ seckey = "******"
 
 def lnglat_to_address(location):
     "经纬度转换为地理位置"
-    target_url = base_url + "?location=" + location + "&key=" + seckey + "&radius=100&extensions=base"
+    # target_url = base_url + "?location=" + location + "&key=" + seckey + "&radius=100&extensions=base"
+    payload = {
+        'location': location,
+        'key': seckey,
+        'radius': 100,
+        'extensions': 'base'
+    }
     # print("请求url：" + target_url)
-    r = requests.get(target_url)
+    r = requests.get(regeo_url, params=payload)
     json_obj = r.json()
 
     # 返回结构化地址信息
@@ -32,8 +38,12 @@ def lnglat_to_address(location):
 
 def address_to_lnglat(address):
     "地理位置转换为经纬度"
-    target_url = base_url1 + '?address=' + address + '&key=' + seckey
-    r = requests.get(target_url)
+    # target_url = base_url1 + '?address=' + address + '&key=' + seckey
+    payload = {
+        'address': address,
+        'key': seckey
+    }
+    r = requests.get(geo_url, params=payload)
     obj = r.json()
     location = obj['geocodes'][0]['location']
     print(location)
@@ -58,4 +68,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    lnglat = address_to_lnglat('北京市海淀区中关村地铁站')
+    print(lnglat)
