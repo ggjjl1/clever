@@ -19,53 +19,55 @@ class Fanfou(object):
         self.username = username
         self.password = password
         self.useragent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-        self.max_id = ''
+        self.max_id = ""
         self.session = None
 
     def login(self):
         login_url = "http://fanfou.com/login"
-        params = {'loginname': self.username, 'loginpass': self.password}
-        headers = {'User-Agent': self.useragent}
+        params = {"loginname": self.username, "loginpass": self.password}
+        headers = {"User-Agent": self.useragent}
         # 获取登录参数
-        r = requests.get('http://fanfou.com/login?fr=%2F', headers=headers)
+        r = requests.get("http://fanfou.com/login?fr=%2F", headers=headers)
         s = re.search(
             '<p class="act">[\s\S]*?name="token" value="(.*?)"[\s\S]*?name="urlfrom" value="(.*?)"[\s\S]*?</p>',
-            r.text)
+            r.text,
+        )
         token = s.group(1)
         urlfrom = s.group(2)
-        params.update({'action': 'login', 'token': token, 'urlfrom': urlfrom})
+        params.update({"action": "login", "token": token, "urlfrom": urlfrom})
         # 通过session方式登录
         self.session = requests.Session()
         rs = self.session.post(login_url, data=params, headers=headers)
 
     # 获取首页用户消息
-    def get_news(self, max_id=''):
+    def get_news(self, max_id=""):
         if self.session is None:
             # print('未登录状态，开始登录')
             self.login()
-        url = 'http://fanfou.com/home' if max_id == '' else 'http://fanfou.com/home?max_id=' + max_id
+        url = (
+            "http://fanfou.com/home"
+            if max_id == ""
+            else "http://fanfou.com/home?max_id=" + max_id
+        )
         headers = {
-            'User-Agent':
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-            'Connection':
-            'keep-alive',
-            'Accept':
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'Cookie':
-            '__utmc=208515845; __utmz=208515845.1586240220.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=208515845.visitor; u=ggjjl1; uuid=fb047ba2fd4e33b348d8.1586240218.6; PHPSESSID=g5ud8uarvjgth1c0rq52splee7; m=ggjjl1; __utma=208515845.1428455074.1586240220.1586939540.1586952014.16; __utmt=1; __utmb=208515845.1.10.1586952014'
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+            "Connection": "keep-alive",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "Cookie": "__utmc=208515845; __utmz=208515845.1586240220.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=208515845.visitor; u=ggjjl1; uuid=fb047ba2fd4e33b348d8.1586240218.6; PHPSESSID=g5ud8uarvjgth1c0rq52splee7; m=ggjjl1; __utma=208515845.1428455074.1586240220.1586939540.1586952014.16; __utmt=1; __utmb=208515845.1.10.1586952014",
         }
         # r = requests.get(url, headers=headers)
         r = self.session.get(url)
-        pattern = re.compile(
-            r'<div id="stream" class="message"><ol[\s\S]*</ol></div>')
+        pattern = re.compile(r'<div id="stream" class="message"><ol[\s\S]*</ol></div>')
         pattern1 = re.compile(
-            r'<li><a.*?<img.*?></a><a.*?<span class="op">.*?</span></li>')
+            r'<li><a.*?<img.*?></a><a.*?<span class="op">.*?</span></li>'
+        )
         s = pattern.search(r.text)
         messages = re.findall(pattern1, s.group())
         for m in messages:
             head = re.search(
                 '<a href="/(.*?)" title="(.*?)" class="avatar"><img src="(.*?)" alt="(.*?)" /></a>.*?<span.*?id="(.*?)" class="content" >(<a href="(.*?)".*?</a>)*(.*?)</span>.*?<span class="stamp"><a.*?stime="(.*?)">',
-                m)
+                m,
+            )
             if head is not None:
                 uid = head.group(1)
                 uname = head.group(2)
@@ -75,8 +77,8 @@ class Fanfou(object):
                 content = head.group(8)
                 stime = head.group(9)
 
-                content = re.sub('<a href=.*?>', '', content)
-                content = re.sub('</a>', '', content)
+                content = re.sub("<a href=.*?>", "", content)
+                content = re.sub("</a>", "", content)
                 print("[%s] %s: %s" % (ffid, uname, content))
                 # now = datetime.datetime.now().strftime('%a %b %d %H:%M:%S +0000 %Y')
                 self.max_id = ffid
@@ -84,8 +86,8 @@ class Fanfou(object):
                 print("head匹配失败。")
 
     # 获取更多用户消息
-    def get_next(self, max_id=''):
-        max_id = self.max_id if max_id == '' else max_id
+    def get_next(self, max_id=""):
+        max_id = self.max_id if max_id == "" else max_id
         self.getNews(max_id)
 
     def get_html(self):
@@ -100,7 +102,7 @@ class Fanfou(object):
 
 def main():
     uname = input("用户名: ")
-    pwd = getpass.getpass('密码: ')
+    pwd = getpass.getpass("密码: ")
     fanfou = Fanfou(uname, pwd)
     # fanfou.login()
     # fanfou.getNews()
@@ -108,13 +110,13 @@ def main():
     # fanfou.getNext()
     while True:
         entry = input(">")
-        if entry == 'quit' or entry == 'exit':
+        if entry == "quit" or entry == "exit":
             break
-        elif entry == 'home':
+        elif entry == "home":
             fanfou.get_news()
-        elif entry == 'next':
+        elif entry == "next":
             fanfou.get_news(fanfou.max_id)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
