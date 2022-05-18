@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Author: gaojunliang
+Email: ggjjl1@126.com
+Date: 2022-05-17
+Description: 一个自动在freiexchange平台上挂单的XCN的小程序
+"""
 import sys
 import json
 import requests
