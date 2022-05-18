@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # python执行1.5亿次循环耗时时间
     counter = 0
     start = int(time.time() * 1000)
