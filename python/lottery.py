@@ -4,7 +4,7 @@ import random
 
 def lottery():
     a = [i for i in range(1, 34)]
-    b = [j for j in range(1, 16)]
+    b = [j for j in range(1, 17)]
     reds = sorted(random.sample(a, 6))
     blues = random.choice(b)
     return tuple(reds + [blues])
